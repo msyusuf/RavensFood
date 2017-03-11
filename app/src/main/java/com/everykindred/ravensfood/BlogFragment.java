@@ -1,25 +1,23 @@
 package com.everykindred.ravensfood;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ListFragment;
-import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -63,7 +61,7 @@ public class BlogFragment extends ListFragment {
     private static final String MENU_ITEM = "menu_item";
     private static final String url = "jdbc:mysql://ravensfood.db.9732590.hostedresource.com:3306/ravensfood";
     private static final String user = "ravensreadonly";
-    private static final String pass = "";
+    private static final String pass = "J9C@2h1F";
     private static final String BLOGS_NEW = "blogs_new";
 
     private List<String> node = new ArrayList<>();
