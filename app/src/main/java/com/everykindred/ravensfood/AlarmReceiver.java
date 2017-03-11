@@ -13,7 +13,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // an Intent broadcast.
         //throw new UnsupportedOperationException("Not yet implemented");
 
-        //Intent dailyUpdater = new Intent(context, FetchIntentService.class);
-        //context.startService(dailyUpdater);
+        Intent dailyUpdater = new Intent(context, FetchIntentService.class);
+        context.startService(dailyUpdater);
     }
 }

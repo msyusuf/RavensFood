@@ -6,9 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.view.SoundEffectConstants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,8 +45,7 @@ public class FetchIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        createNotification("test");
-        //checkNewBlogs();
+        checkNewBlogs();
         checkNewBooks();
     }
 
@@ -77,11 +77,11 @@ public class FetchIntentService extends IntentService {
         }
 
         if (newItemCount > 0) {
-            createNotification(message);
+            createNotification(message + " (" + newItemCount + ")");
 
             //for each new item add title to array to add to prefs
             for (int i = 0; i < newItemCount; i++) {
-                JSONObject json = null;
+                JSONObject json;
                 try {
                     json = jsonArray.getJSONObject(i);
                     String title = json.getString("title");
@@ -148,12 +148,15 @@ public class FetchIntentService extends IntentService {
         PendingIntent resultIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        //get default notification sound
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_rf)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(messageBody)
+                .setSound(alarmSound)
                 .setAutoCancel(true)
-                //.setSound()
                 .setContentIntent(resultIntent);
 
         NotificationManager notificationManager =
