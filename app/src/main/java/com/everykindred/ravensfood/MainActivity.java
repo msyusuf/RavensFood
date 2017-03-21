@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        //set the alarm
+        //set the alarm to run service every hour
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),
                 AlarmManager.INTERVAL_HOUR, alarmIntent);
     }

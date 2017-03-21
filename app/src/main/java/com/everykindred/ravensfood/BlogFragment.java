@@ -61,7 +61,7 @@ public class BlogFragment extends ListFragment {
     private static final String MENU_ITEM = "menu_item";
     private static final String url = "jdbc:mysql://ravensfood.db.9732590.hostedresource.com:3306/ravensfood";
     private static final String user = "ravensreadonly";
-    private static final String pass = "";
+    private static final String pass = "J9C@2h1F";
     private static final String BLOGS_NEW = "blogs_new";
 
     private List<String> node = new ArrayList<>();

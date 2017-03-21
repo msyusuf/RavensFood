@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,7 +41,8 @@ public class CustomBlogAdapter extends SimpleAdapter {
         View view = super.getView(position, convertView, parent);
         String blogTitle = blogList.get(position).get("title");
 
-        Set<String> prefSet = preferences.getStringSet(BLOGS_NEW, null);
+        Set<String> emptySet = Collections.emptySet();
+        Set<String> prefSet = preferences.getStringSet(BLOGS_NEW, emptySet);
         List<String> stringSet = new ArrayList<>(prefSet);
 
         //for all new item matches highlight title font to red and bold

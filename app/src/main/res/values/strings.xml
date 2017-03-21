@@ -35,8 +35,11 @@
     <string name="blogsubtitle">BlogSubtitle</string>
     <string name="blogtitle">BlogTitle</string>
 
-    <string name="newBlogsMessage">New blogs available</string>
-    <string name="newBooksMessage">New books available</string>
+    <string name="newBlogsMessage">A new blog is available</string>
+    <string name="newBlogsMessagePlural">New blogs available</string>
+
+    <string name="newBooksMessage">A new book is available</string>
+    <string name="newBooksMessagePlural">New books available</string>
 
 
 </resources>

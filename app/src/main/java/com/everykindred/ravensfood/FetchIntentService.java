@@ -56,11 +56,13 @@ public class FetchIntentService extends IntentService {
 
     private void checkNewBlogs() {
         String jsonurl = getString(R.string.urlBlogsNewest);
-        String message = getString(R.string.newBlogsMessage);
-        checkNewItems(jsonurl, message, BLOG_LENGTH, BLOGS_NEW);
+        checkNewItems(jsonurl, BLOG_LENGTH, BLOGS_NEW);
     }
 
-    private void checkNewItems(String jsonurl, String message, String prefKey, String prefSetKey) {
+    private void checkNewItems(String jsonurl, String prefKey, String prefSetKey) {
+        String messageSingle = getString(R.string.newBlogsMessage);
+        String messagePlural = getString(R.string.newBlogsMessagePlural);
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String jsonString = getjson(jsonurl);
@@ -69,7 +71,7 @@ public class FetchIntentService extends IntentService {
         int curJsonLength = jsonArray.length();
         int lastJsonLength = sharedPreferences.getInt(prefKey, curJsonLength);
         int newItemCount = curJsonLength - lastJsonLength;
-
+        //int newItemCount = 1;
         Set<String> prefSet = sharedPreferences.getStringSet(prefSetKey, null);
         ArrayList<String> newItems = new ArrayList<>();
         if (prefSet != null) {
@@ -77,19 +79,25 @@ public class FetchIntentService extends IntentService {
         }
 
         if (newItemCount > 0) {
-            createNotification(message + " (" + newItemCount + ")");
-
+            String title = null;
             //for each new item add title to array to add to prefs
             for (int i = 0; i < newItemCount; i++) {
                 JSONObject json;
                 try {
                     json = jsonArray.getJSONObject(i);
-                    String title = json.getString("title");
+                    title = json.getString("title");
                     newItems.add(title);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+
+            messageSingle = messageSingle + " (" + title + ")";
+            messagePlural = messagePlural + " (" + newItemCount + ")";
+
+            //if new count is 1 show title, otherwise show count
+            String message = (newItemCount < 2) ? messageSingle: messagePlural;
+            createNotification(message);
         }
 
         //add new items to string set for prefs
